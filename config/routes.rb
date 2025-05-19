@@ -1,6 +1,5 @@
-Rails.application.routes.draw do
+Rails.application.routes.draw do 
   devise_for :users
-  #devise_for :users
   resources :prices, only: [:new, :index, :show]
   resources :items, only: [:new, :index, :show, :edit]
   resources :users, only: [:new, :show, :edit]
