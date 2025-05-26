@@ -1,9 +1,9 @@
 class UsersController < ApplicationController
   before_action :is_matching_login_user, only: [:edit, :update]
-  def new
-  end
 
   def show
+    @user = User.find(params[:id])
+    @items = @user.items
   end
 
   def edit

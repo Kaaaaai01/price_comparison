@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   devise_for :users
   resources :prices, only: [:new, :index, :show]
   resources :items
-  resources :users, only: [:new, :show, :edit]
+  resources :users, only: [:index, :show, :edit, :update]
   root to: 'homes#top'
   get 'home/about', to: 'homes#about', as: 'about'
   post 'items' => 'items#create' 
