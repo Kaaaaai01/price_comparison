@@ -12,10 +12,13 @@ class ItemsController < ApplicationController
   end
 
   def create
-    @item = Item.new
+    @item = Item.new(item_params)
+    @item.user_id = current_user.id
     if @item.save
-      redirect_to @item
+      flash[:notice] = "投稿が完了しました"
+      redirect_to items_path
     else
+      @user = current_user
       render :new
     end
   end
@@ -27,7 +30,7 @@ class ItemsController < ApplicationController
   def update
     @item = Item.find(params[:id])
     if @item.update(item_params)
-      redirect_to @item
+      redirect_to item_path(@item.id)
     else
       render :edit
     end
@@ -36,7 +39,12 @@ class ItemsController < ApplicationController
   def destroy
     @item = Item.find(params[:id])
     @item.destroy
-    redirect_to item_path
+    redirect_to items_path
   end
 
+  private
+
+  def item_params
+    params.require(:item).permit(:title, :body)
+  end
 end
