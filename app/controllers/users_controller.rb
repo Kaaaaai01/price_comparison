@@ -16,6 +16,11 @@ class UsersController < ApplicationController
     redirect_to user_path(@user.id)
   end
 
+  def destroy
+    current_user.destroy
+    redirect_to new_user_registration_path, notice: '退会しました。'
+  end
+
   private
   def user_params
     params.require(:user).permit(:name, :profile_image)
